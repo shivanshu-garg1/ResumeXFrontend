@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { CircularProgress } from "@/components/ui/circular-progress";
-import KeywordSuggestions from "@/components/editor/KeywordSuggestions";
-import ExportModal from "@/components/export/ExportModal";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Textarea } from "../components/ui/textarea";
+import { Badge } from "../components/ui/badge";
+import { CircularProgress } from "../components/ui/circular-progress";
+import KeywordSuggestions from "../components/editor/KeywordSuggestions";
+import ExportModal from "../components/export/ExportModal";
 import { useState } from "react";
 import { 
   Save, 

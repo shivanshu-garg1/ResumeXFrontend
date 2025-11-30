@@ -113,3 +113,13 @@
     transition: var(--transition-smooth);
   }
 }
+
+@keyframes toastFade {
+  0% { opacity: 1; transform: translateX(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(20px); }
+}
+
+.animate-toast {
+  animation: toastFade 3s forwards;
+}

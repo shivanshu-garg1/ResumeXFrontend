@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import { FileText, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,8 @@ const Header = () => {
     { name: "Pricing", href: "#pricing" },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +25,7 @@ const Header = () => {
               <FileText className="h-6 w-6 text-white" />
             </div>
             <div className="font-bold text-xl text-foreground">
-              ATS<span className="text-primary">Pro</span>
+                Resume<span className="text-primary">X</span>
             </div>
           </div>
 
@@ -41,10 +44,10 @@ const Header = () => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" className="text-muted-foreground hover:text-primary">
+            <Button variant="ghost" className="text-muted-foreground hover:text-primary" onClick={() => { navigate('/login'); }}>
               Sign In
             </Button>
-            <Button className="shadow-elegant hover:shadow-glow transition-smooth">
+            <Button className="shadow-elegant hover:shadow-glow transition-smooth" onClick={() => { navigate('/signup'); }}>
               Get Started Free
             </Button>
           </div>
