@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import { CheckCircle, Upload, FileText, TrendingUp } from "lucide-react";
 
 const Hero = () => {

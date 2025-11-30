@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "../../components/ui/card";
 import { Upload, Search, BarChart3 } from "lucide-react";
 
 const HowItWorks = () => {

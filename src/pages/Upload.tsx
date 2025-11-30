@@ -90,7 +90,9 @@ const handleAnalyze = async () => {
       if (jobText.trim()) formData.append("jobText", jobText);
     }
 
-    const res = await fetch("http://localhost:5000/api/ats/upload", {
+    // const res = await fetch("http://localhost:5000/api/ats/upload", {
+      const res = await fetch(" https://resumexai.onrender.com/api/ats/upload", {
+     
       method: "POST",
       body: formData,
       credentials: "include",

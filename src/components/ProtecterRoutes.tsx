@@ -15,7 +15,9 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/check", {
+         
+        // const res = await fetch("http://localhost:5000/api/auth/check", {
+        const res = await fetch("https://resumexai.onrender.com/api/auth/check", {
           method: "GET",
           credentials: "include",
         });

@@ -25,7 +25,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/check", {
+        // const res = await fetch("http://localhost:5000/api/auth/check", {
+                const res = await fetch("https://resumexai.onrender.com/api/auth/check", {
           method: "GET",
           credentials: "include",
         });
@@ -46,7 +47,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchRecentReports = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/ats/recent", {
+        
+        // const res = await fetch("http://localhost:5000/api/ats/recent", {
+        const res = await fetch("https://resumexai.onrender.com/api/ats/recent", {
           method: "GET",
           credentials: "include",
         });
@@ -79,7 +82,8 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", {
+      // await fetch("http://localhost:5000/api/auth/logout", {
+        await fetch("https://resumexai.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });
