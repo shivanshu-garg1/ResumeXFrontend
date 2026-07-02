@@ -7,6 +7,7 @@ import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { Upload as UploadIcon, FileText, CheckCircle, Briefcase, Target } from "lucide-react";
+import { apiUrl } from "../lib/utils";
 
 type SectionScore = {
   score: number;          
@@ -27,6 +28,14 @@ export type AtsAnalysisResponse = {
     projects?: SectionScore;
     [key: string]: SectionScore | undefined;
   };
+};
+
+const extractAnalysisPayload = (payload: any) => {
+  if (!payload || typeof payload !== "object") return null;
+  if (payload.analysis) return payload.analysis;
+  if (payload.report?.analysis) return payload.report.analysis;
+  if (payload.data?.analysis) return payload.data.analysis;
+  return payload;
 };
 
 const Upload = () => {
@@ -62,7 +71,7 @@ const Upload = () => {
 const handleAnalyze = async () => {
   try {
     setLoading(true);
-    // setError(null);
+    setError(null);
 
     const formData = new FormData();
 
@@ -90,25 +99,30 @@ const handleAnalyze = async () => {
       if (jobText.trim()) formData.append("jobText", jobText);
     }
 
-    // const res = await fetch("http://localhost:5000/api/ats/upload", {
-      const res = await fetch(" https://resumexai.onrender.com/api/ats/upload", {
-     
+    const res = await fetch(apiUrl("/api/ats/upload"), {
       method: "POST",
       body: formData,
       credentials: "include",
     });
+
+    console.log("Response status:", res);
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
       throw new Error(data.message || "Failed to analyze resume");
     }
 
-    const data: AtsAnalysisResponse = await res.json();
+    const data = await res.json();
+    const analysisData = extractAnalysisPayload(data) as AtsAnalysisResponse | null;
+
+    if (!analysisData) {
+      throw new Error("Invalid analysis response from server");
+    }
 
     setError(null);
     // console.log(data);
 
-    navigate("/report", { state: { analysis: data } });
+    navigate("/report", { state: { analysis: analysisData } });
   } catch (err: any) {
     console.error(err);
     setError(err.message || "Something went wrong while analyzing.");
@@ -314,7 +328,7 @@ const handleAnalyze = async () => {
           </Button>
         </div>
 
-\        <Card className="gradient-card border-0 shadow-card mt-8">
+        <Card className="gradient-card border-0 shadow-card mt-8">
           <CardContent className="p-6">
             <div className="flex items-start gap-4">
               <CheckCircle className="h-6 w-6 text-success mt-1" />

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { FileText, Upload, Edit, BarChart3 } from "lucide-react";
+import { apiUrl } from "../lib/utils";
 
 type RecentReport = {
   id: string;
@@ -25,8 +26,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        // const res = await fetch("http://localhost:5000/api/auth/check", {
-                const res = await fetch("https://resumexai.onrender.com/api/auth/check", {
+        const res = await fetch(apiUrl("/api/auth/check"), {
           method: "GET",
           credentials: "include",
         });
@@ -48,8 +48,7 @@ const Dashboard = () => {
     const fetchRecentReports = async () => {
       try {
         
-        // const res = await fetch("http://localhost:5000/api/ats/recent", {
-        const res = await fetch("https://resumexai.onrender.com/api/ats/recent", {
+        const res = await fetch(apiUrl("/api/ats/recent"), {
           method: "GET",
           credentials: "include",
         });
@@ -82,8 +81,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      // await fetch("http://localhost:5000/api/auth/logout", {
-        await fetch("https://resumexai.onrender.com/api/auth/logout", {
+      await fetch(apiUrl("/api/auth/logout"), {
         method: "POST",
         credentials: "include",
       });
@@ -158,7 +156,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card
+          {/* <Card
             className="gradient-card border-0 shadow-card hover:shadow-elegant transition-smooth group cursor-pointer"
             onClick={() => navigate("/editor")}
           >
@@ -171,11 +169,11 @@ const Dashboard = () => {
                 Edit and optimize your resume
               </p>
             </CardContent>
-          </Card>
+          </Card> */}
 
           <Card
             className="gradient-card border-0 shadow-card hover:shadow-elegant transition-smooth group cursor-pointer"
-            onClick={() => navigate("/report")}
+            onClick={() => navigate("/reports")}
           >
             <CardContent className="p-6 text-center">
               <div className="p-3 bg-success/10 rounded-full w-fit mx-auto mb-4 group-hover:bg-success/20 transition-smooth">

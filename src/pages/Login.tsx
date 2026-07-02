@@ -5,6 +5,7 @@ import { Label } from "../components/ui/label";
 import { FileText, ArrowLeft } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { apiUrl } from "../lib/utils";
 
 const Login = () => {
   const location = useLocation() as any;
@@ -37,9 +38,7 @@ const [toastMessage, setToastMessage] = useState<string | null>(null);
     e.preventDefault();
     setError("");
     try {
-      // const res = await fetch("http://localhost:5000/api/auth/login", {
-        const res = await fetch(" https://resumexai.onrender.com/api/auth/login", {
-       
+      const res = await fetch(apiUrl("/api/auth/login"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

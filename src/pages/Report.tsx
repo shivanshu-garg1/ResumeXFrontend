@@ -58,9 +58,17 @@ type BackendAnalysis = {
   recommendations?: BackendRecommendation[];
 };
 
+const normalizeAnalysis = (payload: any): BackendAnalysis | null => {
+  if (!payload || typeof payload !== "object") return null;
+  if (payload.analysis) return payload.analysis as BackendAnalysis;
+  if (payload.report?.analysis) return payload.report.analysis as BackendAnalysis;
+  if (payload.data?.analysis) return payload.data.analysis as BackendAnalysis;
+  return payload as BackendAnalysis;
+};
+
 const Report = () => {
   const location = useLocation() as { state?: { analysis?: BackendAnalysis } };
-  const analysis = location.state?.analysis;
+  const analysis = normalizeAnalysis(location.state?.analysis);
 
   if (!analysis) {
     return (
@@ -198,7 +206,7 @@ const Report = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col gap-3">
+                {/* <div className="flex flex-col gap-3">
                   <Button
                     className="shadow-elegant hover:shadow-glow transition-smooth"
                     onClick={() => (window.location.href = "/editor")}
@@ -211,7 +219,7 @@ const Report = () => {
                     <Eye className="mr-2 h-4 w-4" />
                     Preview Resume
                   </Button>
-                </div>
+                </div> */}
               </div>
               <p className="mt-4  inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-lg font-medium shadow-sm border border-green-300">
                 ✓ A report has been sent to your email

@@ -6,6 +6,7 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Checkbox } from "../components/ui/checkbox";
 import { FileText, ArrowLeft, CheckCircle } from "lucide-react";
+import { apiUrl } from "../lib/utils";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -38,9 +39,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-       
-      // const res = await fetch("http://localhost:5000/api/auth/signup", {
-      const res = await fetch("https://resumexai.onrender.com/api/auth/signup", {
+      const res = await fetch(apiUrl("/api/auth/signup"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
