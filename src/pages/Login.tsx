@@ -54,7 +54,7 @@ const [toastMessage, setToastMessage] = useState<string | null>(null);
       console.log("User logged in:", data);
       navigate("/dashboard");
     } catch (err: any) {
-      // setError("Error: " + err.message);
+      setError("Error: " + err.message);
     }
   };
   return (
